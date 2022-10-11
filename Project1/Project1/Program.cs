@@ -11,6 +11,7 @@ namespace Project1
         static void Main(string[] args)
         {
             Show();
+            Console.ReadKey();
         }
 
         private static void Show()
@@ -18,15 +19,20 @@ namespace Project1
             int n = 256;
             int pad = 8;
 
+            int[] set = new int[pad];
+            Random random = new Random();
+            for (int j = 0; j < pad; j++)
+                set[j] = random.Next(100);
+
             for (int i = 0; i < n; i++)
             {
-                ShowPad(i, pad);
+                ShowPad(i, pad, set);
             }
 
 
         }
 
-        private static void ShowPad(int i, int pad)
+        private static void ShowPad(int i, int pad, int[] set)
         {
             Stack<int> stack = new Stack<int>();
             while (i > 0)
@@ -40,11 +46,23 @@ namespace Project1
             {
                 stack.Push(0);
             }
-            while (stack.Count > 0)
+
+            for (int j = 0; j < pad; j++)
             {
-                Console.Write(stack.Pop());
+                if (stack.Pop() == 1)
+                {
+                    Console.Write("{0} ", set[j]);
+                }
             }
             Console.WriteLine();
+            
+
+
+            //while (stack.Count > 0)
+            //{
+            //    Console.Write(stack.Pop());
+            //}
+            //Console.WriteLine();
         }
     }
 }
